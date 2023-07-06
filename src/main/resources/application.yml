@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  application:
+    name: DemoService
+
+jwt:
+  header-string: Authorization
+  token-validity: 7200
+  signing-key: kRQsxfktEPghxx8CLGSK9sDW2UfR54xkRQsxfktEPghxx8CLGSK9sDW2UfR54xkRQsxfktEPghxx8CLGSK9sDW2UfR54xkRQsxfktEPghxx8CLGSK9sDW2UfR54xkRQsxfktEPghxx8CLGSK9sDW2UfR54xkRQsxfktEPghxx8CLGSK9sDW2UfR54x
+  refresh-token-validity: 86400
+  authorities-key: roles
+  token-prefix: Bearer
+  update-token-in-each-request: false
+
+server:
+  port: 9090
+
+api-doc:
+  openapi:
+    dev-url: http://localhost:9090
+    prod-url: https://prod-ip:9090
+
+#logging:
+#    level:
+#        org:
+#        springframework:
+#            security: DEBUG
+#            web: DEBUG
+#            data: DEBUG
+#            hibernate: DEBUG
+#            jpa: DEBUG
+#            sql: DEBUG
+#            jwt: DEBUG
