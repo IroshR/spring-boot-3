@@ -80,7 +80,6 @@ public class UserController {
             @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Transactional
     public ResponseEntity<Response<UserProfile>> generateToken(@RequestHeader(value = "Accept-Language", required = false) String locale,
                                                                @RequestBody LoginReq loginUser, HttpServletResponse response) {
         try {

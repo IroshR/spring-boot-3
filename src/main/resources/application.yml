@@ -1,6 +1,8 @@
 spring:
+  profiles:
+    active: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/demo?serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/admin_test?serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,7 +20,6 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   application:
     name: DemoService
-
 jwt:
   header-string: Authorization
   token-validity: 7200
@@ -35,6 +36,12 @@ api-doc:
   openapi:
     dev-url: http://localhost:9090
     prod-url: https://prod-ip:9090
+
+#async thread pool configs
+async:
+  corePoolSize: 20
+  maxPoolSize: 20
+  queueCapacity: 200
 
 #logging:
 #    level:
