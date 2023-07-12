@@ -53,7 +53,8 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(entryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/admin/api/register", "/admin/api/login", "/admin/api/refresh-token", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        auth.requestMatchers(
+                                "/admin/api/register", "/admin/api/login", "/admin/api/refresh-token", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 

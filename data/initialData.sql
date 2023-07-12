@@ -1,14 +1,14 @@
 INSERT INTO role (role_id, role_name)
-VALUES (1, 'ROLE_LOGIN'),
-       (2, 'ROLE_ADD_USER'),
-       (3, 'ROLE_VIEW_GROUP_LIST'),
-       (4, 'ROLE_VIEW_ENTITLEMENTS'),
-       (5, 'ROLE_ADD_GROUP'),
-       (6, 'ROLE_VIEW_USER_LIST'),
-       (7, 'ROLE_VIEW_USER_DETAILS'),
-       (8, 'ROLE_UPDATE_USER'),
-       (9, 'ROLE_VIEW_GROUP_DETAILS'),
-       (10, 'ROLE_UPDATE_GROUP');
+VALUES (1, '1'),
+       (2, '2'),
+       (3, '3'),
+       (4, '4'),
+       (5, '5'),
+       (6, '6'),
+       (7, '7'),
+       (8, '8'),
+       (9, '9'),
+       (10, '10');
 
 INSERT INTO entitlement (entitlement_id, entitlement_name)
 VALUES (1, 'LOGIN'),

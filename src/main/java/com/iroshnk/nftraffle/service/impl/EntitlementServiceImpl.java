@@ -35,15 +35,10 @@ public class EntitlementServiceImpl implements EntitlementService {
 
     @Override
     public Set<String> getRolesByUser(Long userId) {
-        var userHasGroup = userHasGroupRepository.findUserHasGroupByUserUserId(userId);
-        List<Long> groupIds = userHasGroup.stream().map(UserHasGroup::getGroup).map(Group::getGroupId).collect(Collectors.toList());
-        List<GroupHasEntitlement> groupHasEntitlements = groupHasEntitlementRepository.getGroupHasEntitlementByGroupGroupIdIn(groupIds);
-        List<Long> entitlementId = groupHasEntitlements.stream().map(GroupHasEntitlement::getEntitlement).map(Entitlement::getEntitlementId).collect(Collectors.toList());
-        List<EntitlementHasRole> entitlementHasRoles = entitlementHasRoleRepository.findEntitlementHasRolesByEntitlementEntitlementIdIn(entitlementId);
-        return entitlementHasRoles
-                .stream()
-                .map(groupHasRole -> groupHasRole.getRole().getRoleName())
-                .collect(Collectors.toSet());
+        List<Long> groupIds = userHasGroupRepository.findGroupIdsByUserId(userId);
+        List<Long> entitlementIds= groupHasEntitlementRepository.findEntitlementIdsByGroupIds(groupIds);
+
+        return entitlementHasRoleRepository.findRoleNamesByEntitlementIds(entitlementIds);
     }
 
     @Override

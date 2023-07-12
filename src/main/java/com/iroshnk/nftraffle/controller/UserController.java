@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -150,7 +151,8 @@ public class UserController {
                         "Refresh token is not in database!"));
     }
 
-    @Secured({"ROLE_ADD_USER"})
+    //@Secured({"ROLE_ADD_USER"})
+    @PreAuthorize("hasRole('2')")
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response<User>> saveUser(@RequestBody UserRegistrationReq userRegistrationReq,
                                                    @RequestHeader("Authorization") String token) {
@@ -166,7 +168,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_LOGIN"})
+    //@Secured({"ROLE_LOGIN"})
+    @PreAuthorize("hasRole('1')")
     @PostMapping(value = "/reset-password", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> resetPassword(@RequestBody ResetPasswordReq resetPassword,
                                               @RequestHeader("Authorization") String token) {
@@ -183,7 +186,7 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_VIEW_GROUP_LIST"})
+    @PreAuthorize("hasRole('3')")
     @GetMapping(value = "/groups")
     public ResponseEntity<Response<List<Group>>> getGroups(@RequestHeader("Authorization") String token) {
         try {
@@ -198,7 +201,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_VIEW_ENTITLEMENTS"})
+    //@Secured({"ROLE_VIEW_ENTITLEMENTS"})
+    @PreAuthorize("hasRole('4')")
     @GetMapping(value = "/entitlements")
     public ResponseEntity<Response<List<Entitlement>>> getEntitlements(@RequestHeader("Authorization") String token) {
         try {
@@ -213,7 +217,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_ADD_GROUP"})
+    //@Secured({"ROLE_ADD_GROUP"})
+    @PreAuthorize("hasRole('5')")
     @PostMapping(value = "/groups")
     public ResponseEntity<Response<GroupRes>> createGroup(@RequestBody GroupReq groupReq,
                                                           @RequestHeader("Authorization") String token) {
@@ -232,7 +237,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_UPDATE_GROUP"})
+    //@Secured({"ROLE_UPDATE_GROUP"})
+    @PreAuthorize("hasRole('10')")
     @PutMapping(value = "/groups")
     public ResponseEntity<Response<GroupRes>> updateGroup(@RequestBody GroupReq groupReq,
                                                           @RequestHeader("Authorization") String token) {
@@ -251,7 +257,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_UPDATE_USER"})
+//    @Secured({"ROLE_UPDATE_USER"})
+    @PreAuthorize("hasRole('8')")
     @PutMapping(value = "/users")
     public ResponseEntity<Response<User>> updateUser(@RequestBody UserRegistrationReq userRegistrationReq,
                                                      @RequestHeader("Authorization") String token) {
@@ -270,7 +277,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_VIEW_USER_LIST"})
+    //@Secured({"ROLE_VIEW_USER_LIST"})
+    @PreAuthorize("hasRole('6')")
     @GetMapping(value = "/users")
     public ResponseEntity<PaginationResponse<List<UserRes>>> getUsers(
             @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
@@ -292,7 +300,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_VIEW_USER_DETAILS"})
+    //@Secured({"ROLE_VIEW_USER_DETAILS"})
+    @PreAuthorize("hasRole('7')")
     @GetMapping(value = "/users/{userId}")
     public ResponseEntity<Response<UserRes>> getUserById(@PathVariable Long userId,
                                                          @RequestHeader("Authorization") String token) {
@@ -312,7 +321,8 @@ public class UserController {
         }
     }
 
-    @Secured({"ROLE_VIEW_GROUP_DETAILS"})
+    //@Secured({"ROLE_VIEW_GROUP_DETAILS"})
+    @PreAuthorize("hasRole('9')")
     @GetMapping(value = "/groups/{groupId}")
     public ResponseEntity<Response<GroupRes>> getGroupById(@PathVariable Long groupId,
                                                            @RequestHeader("Authorization") String token) {

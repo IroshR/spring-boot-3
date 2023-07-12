@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service(value = "userService")
-@Transactional
+//@Transactional
 public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final BCryptPasswordEncoder bcryptEncoder;
