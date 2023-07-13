@@ -1,7 +1,7 @@
 package com.iroshnk.nftraffle.service.impl;
 
 
-import com.iroshnk.nftraffle.entity.*;
+import com.iroshnk.nftraffle.entity.Entitlement;
 import com.iroshnk.nftraffle.repository.EntitlementHasRoleRepository;
 import com.iroshnk.nftraffle.repository.EntitlementRepository;
 import com.iroshnk.nftraffle.repository.GroupHasEntitlementRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,7 +35,7 @@ public class EntitlementServiceImpl implements EntitlementService {
     @Override
     public Set<String> getRolesByUser(Long userId) {
         List<Long> groupIds = userHasGroupRepository.findGroupIdsByUserId(userId);
-        List<Long> entitlementIds= groupHasEntitlementRepository.findEntitlementIdsByGroupIds(groupIds);
+        List<Long> entitlementIds = groupHasEntitlementRepository.findEntitlementIdsByGroupIds(groupIds);
 
         return entitlementHasRoleRepository.findRoleNamesByEntitlementIds(entitlementIds);
     }

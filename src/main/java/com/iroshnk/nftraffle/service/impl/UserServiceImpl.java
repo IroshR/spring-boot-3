@@ -11,14 +11,13 @@ import com.iroshnk.nftraffle.service.UserService;
 import com.iroshnk.nftraffle.service.impl.validator.UserValidator;
 import com.iroshnk.nftraffle.util.ResponseDetails;
 import com.iroshnk.nftraffle.util.exception.DataNotAcceptableException;
-import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,7 +31,7 @@ import java.util.stream.Collectors;
 //@Transactional
 public class UserServiceImpl implements UserDetailsService, UserService {
 
-    private final BCryptPasswordEncoder bcryptEncoder;
+    private final Argon2PasswordEncoder bcryptEncoder;
     private final UserLoginRepository userLoginRepository;
     private final EntitlementService entitlementService;
     private final UserSessionRepository userSessionRepository;
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private final UserValidator userValidator;
     private final UserRepository userRepository;
 
-    public UserServiceImpl(BCryptPasswordEncoder bcryptEncoder,
+    public UserServiceImpl(Argon2PasswordEncoder bcryptEncoder,
                            UserLoginRepository userLoginRepository,
                            EntitlementService entitlementService,
                            UserSessionRepository userSessionRepository,
@@ -58,7 +57,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         this.userValidator = userValidator;
         this.userRepository = userRepository;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) {

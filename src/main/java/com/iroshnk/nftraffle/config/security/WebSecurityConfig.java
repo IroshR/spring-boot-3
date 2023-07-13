@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -30,7 +30,7 @@ public class WebSecurityConfig {
     private UserDetailsService userService;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private Argon2PasswordEncoder passwordEncoder;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                "/admin/api/register", "/admin/api/login", "/admin/api/refresh-token", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**").permitAll()
+                                        "/admin/api/register", "/admin/api/login", "/admin/api/refresh-token", "/v3/api-docs/**", "/swagger-ui/**", "/actuator/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 

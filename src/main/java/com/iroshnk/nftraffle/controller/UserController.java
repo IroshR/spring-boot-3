@@ -27,13 +27,11 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -257,7 +255,7 @@ public class UserController {
         }
     }
 
-//    @Secured({"ROLE_UPDATE_USER"})
+    //    @Secured({"ROLE_UPDATE_USER"})
     @PreAuthorize("hasRole('8')")
     @PutMapping(value = "/users")
     public ResponseEntity<Response<User>> updateUser(@RequestBody UserRegistrationReq userRegistrationReq,
